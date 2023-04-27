@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.enjoytrip.model.mapper.TravelMapper">
+    <resultMap id="travelInfoMap" type="TravelInfo">
+        <result property="travelInfoId" column="travel_info_id"/>
+        <result property="travelTypeId" column="travelTypeId"/>
+        <result property="title" column="title"/>
+        <result property="addr1" column="addr1"/>
+        <result property="addr2" column="addr2"/>
+        <result property="zipcode" column="zipcode"/>
+        <result property="tel" column="tel"/>
+        <result property="firstImage" column="first_image"/>
+        <result property="firstImage2" column="first_image2"/>
+        <result property="readcount" column="readcount"/>
+        <result property="sidoCode" column="sido_code"/>
+        <result property="gugunCode" column="gugun_code"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="mlevel" column="mlevel"/>
+    </resultMap>
+    <parameterMap id="codeMap" type="map">
+    </parameterMap>
+
+    <select id="selectGetAll" resultType="travelInfo">
+        select title,
+               addr1,
+               travel_info_id as travelInfoId,
+               first_image    as firstImage
+        from travel_info
+    </select>
+
+    <select id="selectBySidoCode" resultType="Gugun" parameterType="int">
+        select gugun_code as gugunCode, gugun_name as gugunName
+        from gugun
+        where sido_code = #{sidoCode}
+        order by gugun_code
+    </select>
+
+    <select id="selectBySidoCodeGugunCode" resultType="travelInfo">
+        select title,
+        addr1,
+        travel_info_id as travelInfoId,
+        first_image as firstImage
+        from travel_info
+        where sido_code = #{sidoCode}
+        <if test="gugunCode != -1">
+            and gugun_code = #{gugunCode}
+        </if>
+        <if test="travelInfoId != -1">
+            and travel_info_id = #{travelInfoId}
+        </if>
+        order by readcount desc
+    </select>
+</mapper>
