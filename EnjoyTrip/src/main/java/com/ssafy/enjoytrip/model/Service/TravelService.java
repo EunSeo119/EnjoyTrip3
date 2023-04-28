@@ -11,17 +11,13 @@ public interface TravelService {
 
     List<Gugun> getGugun(int sidoCode) throws Exception;
 
-    List<TravelInfo> getTravel(int sidoCode) throws Exception;
-
-    List<TravelInfo> getTravel(int sidoCode, int gugunCode) throws Exception;
-
-    List<TravelInfo> getTravel(int sidoCode, int gugunCode, int travelTypeId) throws Exception;
+    List<TravelInfo> getTravel(Integer sidoCode, Integer gugunCode, Integer travelTypeId) throws Exception;
 
     int updateLike(String userId, Integer travelInfoId, Integer like);
 
-    TravelStatus getTravelStatus(String userId, Integer travelInfoId);
+    TravelStatus getTravelStatus(TravelStatus travelStatus);
 
-    void registLike(String userId, int travelInfoId);
+    void registLike(TravelStatus travelStatus);
 
     void registStar(TravelStatus travelStatus);
 

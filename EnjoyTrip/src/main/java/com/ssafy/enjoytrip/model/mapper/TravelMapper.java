@@ -13,21 +13,17 @@ import java.util.List;
 public interface TravelMapper {
     List<TravelInfo> selectGetAll() throws SQLException;
 
-    List<Gugun> selectBySidoCode(@Param("sidoCode") int sidoCode) throws SQLException;
-
-    List<TravelInfo> selectBySidoCodeGugunCode(@Param("sidoCode") int sidoCode, @Param("gugunCode") int gugunCode) throws SQLException;
-
-    List<TravelInfo> selectBySidoCodeGugunCode(@Param("sidoCode") int sidoCode) throws SQLException;
-
-    List<TravelInfo> selectBySidoCodeGugunCode(@Param("sidoCode") int sidoCode, @Param("gugunCode") int gugunCode, @Param("travelInfoId") int travelInfoId) throws SQLException;
+    List<TravelInfo> selectBySidoCodeGugunCode(@Param("sidoCode") Integer sidoCode, @Param("gugunCode") Integer gugunCode, @Param("travelTypeId") Integer travelTypeId) throws SQLException;
 
     int updateLike(@Param("userId") String userId, @Param("travelInfoId") Integer travelInfoId, @Param("like") Integer like);
 
-    TravelStatus selectTravelStatus(@Param("userId") String userId, @Param("travelInfoId") Integer travelInfoId);
+    TravelStatus selectTravelStatus(TravelStatus travelStatus);
 
-    void insertLike(@Param("userId") String userId, @Param("travelInfoId") int travelInfoId);
+    void insertLike(TravelStatus travelStatus);
 
     void insertStar(TravelStatus travelStatus);
 
     int updateStar(TravelStatus travelStatus);
+
+    List<Gugun> selectGugun(@Param("sidoCode") int sidoCode);
 }

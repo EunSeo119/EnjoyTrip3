@@ -4,14 +4,7 @@
 
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.UserMapper">
 
-    <resultMap id="userMap" type="User">
-        <result property="userId" column="user_id"/>
-        <result property="password" column="password"/>
-        <result property="name" column="name"/>
-        <result property="email" column="email"/>
-    </resultMap>
-
-    <select id="selectUserLogin" resultMap="userMap" parameterType="User">
+    <select id="selectUserLogin" resultType="user" parameterType="User">
         select user_id, name
         from user
         where user_id = #{userId}
@@ -23,7 +16,7 @@
         values (#{userId}, #{password}, #{name}, #{email})
     </insert>
 
-    <select id="selectUserList" resultMap="userMap">
+    <select id="selectUserList" resultType="user">
         select user_id, password, name, email
         from user
     </select>
