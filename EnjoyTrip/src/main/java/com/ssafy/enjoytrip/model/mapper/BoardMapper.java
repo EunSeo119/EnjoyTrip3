@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.enjoytrip.model.Notice;
 
@@ -15,4 +16,6 @@ public interface BoardMapper {
 	void insertNotice(Notice notice);
 	
 	Notice selectGetDetail(int noticeId) throws SQLException;
+	
+	void updateViewCount(@Param("noticeId") int noticeId, @Param("viewCount") int viewCount);
 }
