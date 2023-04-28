@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
@@ -13,4 +14,6 @@ public interface UserMapper {
     void insertUser(User user);
 
     List<User> selectUserList();
+
+    Map<String, Object> selectDetailUser(String user);
 }

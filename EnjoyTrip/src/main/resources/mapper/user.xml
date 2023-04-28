@@ -21,4 +21,11 @@
         from user
     </select>
 
+    <select id="selectDetailUser" resultType="map" parameterType="string">
+        select u.user_id, u.name, u.email, s.sido_name
+        from user u
+                 join sido s
+                      on u.sido_code = s.sido_code
+        where user_id = #{userId}
+    </select>
 </mapper>

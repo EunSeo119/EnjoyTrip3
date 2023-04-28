@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,5 +34,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> userList() {
         return userMapper.selectUserList();
+    }
+
+    @Override
+    public Map<String, Object> selectUserDetail(String userId) {
+        return userMapper.selectDetailUser(userId);
     }
 }
