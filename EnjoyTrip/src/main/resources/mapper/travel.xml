@@ -53,4 +53,39 @@
         </if>
         order by readcount desc
     </select>
+
+    <select id="selectTravelStatus" resultType="travelStatus">
+        select `like`, star
+        from travel_status
+        where travel_status_id = #{travelInfoId}
+          and user_id = #{userId}
+    </select>
+
+
+    <insert id="insertLike" parameterType="travelStatus">
+        insert into travel_status(user_id, travel_info_id, `like`, star)
+        values (#{userId}, #{travelInfoId}, 1, 0.0)
+    </insert>
+
+    <insert id="insertStar" parameterType="travelStatus">
+        insert into travel_status(user_id, travel_info_id, `like`, star)
+        values (#{userId}, #{travelInfoId}, #{like}, #{star})
+    </insert>
+
+    <update id="updateLike">
+        update travel_status set `like` =
+        <if test="like == 0">
+            1
+        </if>
+        <if test="like != 0">
+            0
+        </if>
+        where travel_Info_id = #{travelInfoId} and user_id = #{userId}
+    </update>
+
+    <update id="updateStar" parameterType="travelStatus">
+        update travel_status
+        set star = #{star}
+        where travel_status_id = #{travelStatusId}
+    </update>
 </mapper>
