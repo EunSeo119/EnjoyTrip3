@@ -1,5 +1,7 @@
 package com.ssafy.enjoytrip.model;
 
+import java.util.List;
+
 public class Plan {
 	private int planId;
 	private String title;
@@ -8,6 +10,15 @@ public class Plan {
 	private String description;
 	private String image;
 	private String userId;
+	private List<PlanTravel> planTravels;
+
+	public List<PlanTravel> getPlanTravels() {
+		return planTravels;
+	}
+
+	public void setPlanTravels(List<PlanTravel> planTravels) {
+		this.planTravels = planTravels;
+	}
 
 	public int getPlanId() {
 		return planId;
