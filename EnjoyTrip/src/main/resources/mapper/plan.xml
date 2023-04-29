@@ -7,13 +7,16 @@
 	<insert id="insertPlan" parameterType="plan">
     	insert into plan(title, start_date, end_date, description, image, user_id)
     	values (#{title}, #{startDate}, #{endDate}, #{description}, #{image}, #{userId})
+    	<selectKey resultType="int" keyProperty="planId" order="AFTER">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
     </insert>
     
-    <insert id="insertPlanTravels" parameterType="PlanTravel">
-    	insert into plan_travel(travel_info_id, no)
+    <insert id="insertPlanTravels" >
+    	insert into plan_travel(plan_id, travel_info_id, no)
     	values 
-    	<foreach collection="list" item="item" separator=",">
-	    	(#{item.travelInfoId}, #{item.no})
+    	<foreach collection="planTravels" item="item" separator=",">
+	    	(#{planId}, #{item.travelInfoId}, #{item.no})
     	</foreach>
     </insert>
     

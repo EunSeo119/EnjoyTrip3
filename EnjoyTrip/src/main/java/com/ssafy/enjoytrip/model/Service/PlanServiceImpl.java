@@ -17,7 +17,8 @@ public class PlanServiceImpl implements PlanService{
 	@Override
 	public void registPlan(Plan plan) {
 		planMapper.insertPlan(plan);
-		planMapper.getPlanId(plan);
-		planMapper.insertPlanTravels(plan.getPlanTravels());
+//		planMapper.getPlanId(plan);
+		System.out.println(plan.getPlanId());
+		planMapper.insertPlanTravels(plan.getPlanId(), plan.getPlanTravels());
 	}
 }
