@@ -13,16 +13,19 @@
     	values (#{title}, #{content}, now())
     </insert>
     
-    <select id="selectGetDetail" parameterType="int" resultMap="updateView">
+    <select id="selectGetDetail" parameterType="int" resultType="Notice">
     	select notice_id as noticeId, title, content, create_date as createDate, views
     	from notice
     	where notice_id = #{noticeId}
-    	
-    	transation
-    	update
     </select>
     
-    <resultMap id="updateView">
+    <update id="updateViewCount">
+    	update notice
+    	set views = #{viewCount}
+    	where notice_id = #{noticeId}
+    </update>
+    
+    <!-- <resultMap id="updateView">
     	<association select=""
-    </resultMap>
+    </resultMap> -->
 </mapper>
