@@ -4,6 +4,24 @@
         
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.PlanMapper">
 
+	<resultMap type="plan" id="viewPlan" extends="planInfo">
+		<collection property="planTravels" column="plan_id" javaType="list" ofType="planTravel" select="planTravelList"/>
+	</resultMap>
+	
+	<resultMap type="plan" id="planInfo">
+		<result column="plan_id" property="planId"/>
+		<result column="title" property="title"/>
+		<result column="description" property="description"/>
+		<result column="image" property="image"/>
+		<result column="user_id" property="userId"/>
+	</resultMap>
+	
+	<resultMap type="planTravel" id="viewPlanTravel">
+		<result column="plan_id" property="planId"/>
+		<result column="travel_info_id" property="travelInfoId"/>
+		<result column="no" property="no"/>
+	</resultMap>
+
 	<insert id="insertPlan" parameterType="plan">
     	insert into plan(title, start_date, end_date, description, image, user_id)
     	values (#{title}, #{startDate}, #{endDate}, #{description}, #{image}, #{userId})
@@ -19,5 +37,22 @@
 	    	(#{planId}, #{item.travelInfoId}, #{item.no})
     	</foreach>
     </insert>
+    
+    <select id="selectGetAll" resultType="Plan">
+		select plan_id, title, start_date, end_date, image, user_id
+		from plan
+    </select>
+    
+    <select id="selectGetDetail" parameterType="int" resultMap="viewPlan">
+    	select *
+    	from plan p
+    	where plan_id = #{planId}
+    </select>
+    
+	<select id="planTravelList" resultMap="viewPlanTravel">
+		select plan_id, travel_info_id, no
+		from plan_travel
+		where plan_id = #{planId}
+	</select>
     
 </mapper>
