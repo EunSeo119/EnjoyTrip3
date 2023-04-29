@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.ssafy.enjoytrip.model.mapper.PlanMapper">
+
+	<insert id="insertPlan" parameterType="plan">
+    	insert into plan(title, start_date, end_date, description, image, user_id)
+    	values (#{title}, #{startDate}, #{endDate}, #{description}, #{image}, #{userId})
+    </insert>
+    
+    <insert id="insertPlanTravels" parameterType="PlanTravel">
+    	insert into plan_travel(travel_info_id, no)
+    	values 
+    	<foreach collection="list" item="item" separator=",">
+	    	(#{item.travelInfoId}, #{item.no})
+    	</foreach>
+    </insert>
+    
+</mapper>

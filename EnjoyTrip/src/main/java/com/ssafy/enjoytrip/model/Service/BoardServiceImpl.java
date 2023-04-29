@@ -28,7 +28,10 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Notice getNoticeDetail(int noticeId) throws Exception {
-		return boardMapper.selectGetDetail(noticeId);
+		Notice notice = boardMapper.selectGetDetail(noticeId);
+		notice.setViews(notice.getViews()+1);
+		boardMapper.updateViewCount(noticeId, notice.getViews());
+		return notice;
 	}
 
 }
