@@ -5,14 +5,12 @@ public class TravelStatus {
     private String userId;
     private int travelInfoId;
     private int like;
-    private double star;
+    private Double star;
 
+    public TravelStatus() {
 
-    public TravelStatus(String userId, Integer travelInfoId, Double star) {
-        this.userId = userId;
-        this.travelInfoId = travelInfoId;
-        this.star = star;
     }
+
 
     public int getTravelStatusId() {
         return travelStatusId;
@@ -46,12 +44,16 @@ public class TravelStatus {
         this.like = like;
     }
 
-    public double getStar() {
+    public Double getStar() {
         return star;
     }
 
-    public void setStar(double star) {
+    public void setStar(Double star) {
         this.star = star;
     }
 
+    @Override
+    public String toString() {
+        return "TravelStatus{" + "travelStatusId=" + travelStatusId + ", userId='" + userId + '\'' + ", travelInfoId=" + travelInfoId + ", like=" + like + ", star=" + star + '}';
+    }
 }

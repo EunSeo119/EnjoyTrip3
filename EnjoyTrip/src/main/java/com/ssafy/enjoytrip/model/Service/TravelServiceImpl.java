@@ -24,21 +24,11 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public List<Gugun> getGugun(int sidoCode) throws Exception {
-        return travelMapper.selectBySidoCode(sidoCode);
+        return travelMapper.selectGugun(sidoCode);
     }
 
     @Override
-    public List<TravelInfo> getTravel(int sidoCode) throws Exception {
-        return travelMapper.selectBySidoCodeGugunCode(sidoCode);
-    }
-
-    @Override
-    public List<TravelInfo> getTravel(int sidoCode, int gugunCode) throws Exception {
-        return travelMapper.selectBySidoCodeGugunCode(sidoCode, gugunCode);
-    }
-
-    @Override
-    public List<TravelInfo> getTravel(int sidoCode, int gugunCode, int travelTypeId) throws Exception {
+    public List<TravelInfo> getTravel(Integer sidoCode, Integer gugunCode, Integer travelTypeId) throws Exception {
         return travelMapper.selectBySidoCodeGugunCode(sidoCode, gugunCode, travelTypeId);
     }
 
@@ -48,13 +38,13 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public TravelStatus getTravelStatus(String userId, Integer travelInfoId) {
-        return travelMapper.selectTravelStatus(userId, travelInfoId);
+    public TravelStatus getTravelStatus(TravelStatus travelStatus) {
+        return travelMapper.selectTravelStatus(travelStatus);
     }
 
     @Override
-    public void registLike(String userId, int travelInfoId) {
-        travelMapper.insertLike(userId, travelInfoId);
+    public void registLike(TravelStatus travelStatus) {
+        travelMapper.insertLike(travelStatus);
     }
 
     @Override
@@ -64,6 +54,7 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public int updateStar(TravelStatus travelStatus) {
+        System.out.println(travelStatus.getStar());
         return travelMapper.updateStar(travelStatus);
     }
 }

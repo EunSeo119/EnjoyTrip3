@@ -25,7 +25,7 @@ public class UserController {
         return "user/login";
     }
 
-    @PostMapping(value = "/login")
+    @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody User user, Model model) throws Exception {
         System.out.println(user);
         User login = userService.login(user);
@@ -43,7 +43,7 @@ public class UserController {
 //        return "user/join";
 //    }
 //
-    @PostMapping(value = "/join")
+    @PostMapping("join")
     public ResponseEntity<?> join(@RequestBody User user) throws Exception {
         userService.join(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -55,17 +55,17 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/mypage")
-    public String mypage(Model model) {
-        return "user/mypage";
+    @GetMapping("mypage/{userId}")
+    public ResponseEntity<?> mypage(@PathVariable("userId") String userId) {
+        return new ResponseEntity<>(userService.selectUserDetail(userId), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/findPassword")
+    @GetMapping("findPassword")
     public String findPassword() {
         return "user/findPw";
     }
 
-    @GetMapping(value = "/user")
+    @GetMapping("user")
     public ResponseEntity<?> userList() {
         List<User> list = userService.userList();
         return new ResponseEntity<>(list, HttpStatus.OK);

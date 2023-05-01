@@ -21,14 +21,15 @@ public class TravelController {
         this.travelService = travelService;
     }
 
-    @GetMapping("list")
-    public ResponseEntity<List<TravelInfo>> getAttractionAll() throws Exception {
-        return new ResponseEntity<>(travelService.getTravelAll(), HttpStatus.OK);
-    }
 
-    @GetMapping("/list/{sidoCode}")
-    public ResponseEntity<List<TravelInfo>> getAttractionByArea(@PathVariable("sidoCode") int sidoCode) throws Exception {
-        return new ResponseEntity<>(travelService.getTravel(sidoCode, -1, -1), HttpStatus.OK);
+    @GetMapping({"list", "/list/{sidoCode}/{gugunCode}", "/list/{sidoCode}", "/list/{sidoCode}/{gugunCode}/{travelTypeId}"})
+    public ResponseEntity<List<TravelInfo>> getAttractionByAreaGugun(@PathVariable(value = "sidoCode", required = false) Integer sidoCode, @PathVariable(value = "gugunCode", required = false) Integer gugunCode, @PathVariable(value = "travelTypeId", required = false) Integer travelTypeId) throws Exception {
+        if (sidoCode == null) return new ResponseEntity<>(travelService.getTravelAll(), HttpStatus.OK);
+        else if (gugunCode == null)
+            return new ResponseEntity<>(travelService.getTravel(sidoCode, null, null), HttpStatus.OK);
+        else if (travelTypeId == null)
+            return new ResponseEntity<>(travelService.getTravel(sidoCode, gugunCode, null), HttpStatus.OK);
+        else return new ResponseEntity<>(travelService.getTravel(sidoCode, gugunCode, travelTypeId), HttpStatus.OK);
     }
 
     @GetMapping("/list/gugun/{sidoCode}")
@@ -36,39 +37,29 @@ public class TravelController {
         return new ResponseEntity<>(travelService.getGugun(sidoCode), HttpStatus.OK);
     }
 
-    @GetMapping("/list/{sidoCode}/{gugunCode}")
-    public ResponseEntity<List<TravelInfo>> getAttractionByAreaGugun(@PathVariable("sidoCode") int sidoCode, @PathVariable("gugunCode") Integer gugunCode) throws Exception {
-        return new ResponseEntity<>(travelService.getTravel(sidoCode, gugunCode, -1), HttpStatus.OK);
-    }
-
-
-    @GetMapping("/list/{sidoCode}/{gugunCode}/{travelTypeId}")
-    public ResponseEntity<List<TravelInfo>> getAttractionByAreaGugunType(@PathVariable("sidoCode") Integer sidoCode, @PathVariable("gugunCode") int gugunCode, @PathVariable("travelTypeId") int travelTypeId) throws Exception {
-        return new ResponseEntity<>(travelService.getTravel(sidoCode, gugunCode, travelTypeId), HttpStatus.OK);
-    }
-
     @PutMapping("status/like")
-    public ResponseEntity<?> updateLike(@RequestBody Map<String, String> map) {
-        TravelStatus travelStatus = travelService.getTravelStatus(map.get("userId"), Integer.valueOf(map.get("travelInfoId")));
-
+    public ResponseEntity<?> updateLike(@RequestBody TravelStatus param) {
+        TravelStatus travelStatus = travelService.getTravelStatus(param);
         if (travelStatus == null) {
-            travelService.registLike(map.get("userId"), Integer.parseInt(map.get("travelInfoId")));
+            travelService.registLike(param);
             return new ResponseEntity<>("좋아요 성공", HttpStatus.OK);
         } else {
-            System.out.println(travelStatus.getUserId());
-            return new ResponseEntity<>(travelService.updateLike(travelStatus.getUserId(), travelStatus.getTravelInfoId(), travelStatus.getLike()), HttpStatus.OK);
+            if (travelService.updateLike(travelStatus.getUserId(), travelStatus.getTravelInfoId(), travelStatus.getLike()) == 1)
+                return new ResponseEntity<>("좋아요 성공", HttpStatus.OK);
+            else {
+                return new ResponseEntity<>("좋아요 실패", HttpStatus.BAD_REQUEST);
+            }
         }
     }
 
-    @PutMapping("status/star/{userId}")
-    public ResponseEntity<?> updateStar(@PathVariable("userId") String userId, @RequestBody Map<String, Object> map) {
-        TravelStatus travelStatus = travelService.getTravelStatus(userId, (Integer) map.get("travelInfoId"));
-
+    @PutMapping("status/star")
+    public ResponseEntity<?> updateStar(@RequestBody TravelStatus param) {
+        TravelStatus travelStatus = travelService.getTravelStatus(param);
         if (travelStatus == null) {
-            travelService.registStar(new TravelStatus(userId, (Integer) map.get("travelInfoId"), (Double) map.get("star")));
+            travelService.registStar(param);
             return new ResponseEntity<>("별점 등록 성공", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(travelService.updateStar(travelStatus), HttpStatus.OK);
+            return new ResponseEntity<>(travelService.updateStar(param), HttpStatus.OK);
         }
     }
 }
