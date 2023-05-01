@@ -1,10 +1,19 @@
 package com.ssafy.enjoytrip.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "User : 사용자 정보", description = "사용자 정보")
 public class User {
+    @ApiModelProperty(value = "사용자 아이디", example = "ssafy")
     private String userId;
+    @ApiModelProperty(value = "사용자 비밀번호")
     private String password;
+    @ApiModelProperty(value = "사용자 이름")
     private String name;
+    @ApiModelProperty(value = "사용자 이메일")
     private String email;
+    @ApiModelProperty(value = "사용자 시도코드")
     private int sidoCode;
 
     public String getUserId() {

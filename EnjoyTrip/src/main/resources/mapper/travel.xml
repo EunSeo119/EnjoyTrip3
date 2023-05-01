@@ -10,6 +10,7 @@
                travel_info_id,
                first_image
         from travel_info
+        order by readcount desc
     </select>
 
     <select id="selectGugun" resultType="Gugun">

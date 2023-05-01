@@ -20,29 +20,29 @@ import com.ssafy.enjoytrip.model.Service.BoardService;
 @RequestMapping("/board")
 @CrossOrigin("*")
 public class BoardController {
-	private final BoardService boardService;
+    private final BoardService boardService;
 
-	public BoardController(BoardService boardService) {
-		super();
-		this.boardService = boardService;
-	}
-	
-	@GetMapping("list")
+    public BoardController(BoardService boardService) {
+        super();
+        this.boardService = boardService;
+    }
+
+    @GetMapping("list")
     public ResponseEntity<List<Notice>> getNoticeAll() throws Exception {
         System.out.println("getNoticeAll");
         return new ResponseEntity<>(boardService.getNoticeAll(), HttpStatus.OK);
     }
-	
-	@PostMapping("regist")
-	public ResponseEntity<?> registNotice(@RequestBody Notice notice) throws Exception {
-		boardService.writeNotice(notice);
-		return new ResponseEntity<>(notice, HttpStatus.OK);
-	}
-	
-	@GetMapping("/detail/{noticeId}")
-	public ResponseEntity<Notice> getNoticeDetail(@PathVariable("noticeId") int noticeId) throws Exception {
-		System.out.println("getNoticeDetail");
-		return new ResponseEntity<>(boardService.getNoticeDetail(noticeId), HttpStatus.OK);
-	}
-	
+
+    @PostMapping("regist")
+    public ResponseEntity<?> registNotice(@RequestBody Notice notice) throws Exception {
+        boardService.writeNotice(notice);
+        return new ResponseEntity<>(notice, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{noticeId}")
+    public ResponseEntity<Notice> getNoticeDetail(@PathVariable("noticeId") int noticeId) throws Exception {
+        System.out.println("getNoticeDetail");
+        return new ResponseEntity<>(boardService.getNoticeDetail(noticeId), HttpStatus.OK);
+    }
+
 }

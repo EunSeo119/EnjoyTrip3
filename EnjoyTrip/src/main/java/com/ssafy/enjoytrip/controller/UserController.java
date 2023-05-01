@@ -2,6 +2,7 @@ package com.ssafy.enjoytrip.controller;
 
 import com.ssafy.enjoytrip.model.Service.UserService;
 import com.ssafy.enjoytrip.model.User;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
+@Api(value = "User", description = "사용자 관리")
 public class UserController {
     private final UserService userService;
 
@@ -58,11 +60,6 @@ public class UserController {
     @GetMapping("mypage/{userId}")
     public ResponseEntity<?> mypage(@PathVariable("userId") String userId) {
         return new ResponseEntity<>(userService.selectUserDetail(userId), HttpStatus.OK);
-    }
-
-    @GetMapping("findPassword")
-    public String findPassword() {
-        return "user/findPw";
     }
 
     @GetMapping("user")
