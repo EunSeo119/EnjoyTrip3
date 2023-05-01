@@ -10,4 +10,6 @@ public interface PlanService {
 	List<Plan> getPlanAll() throws Exception;
 	
 	Plan getPlanDetail(int planId) throws Exception;
+	
+	void deletePlan(int planId) throws Exception;
 }

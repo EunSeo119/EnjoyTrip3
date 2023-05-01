@@ -54,5 +54,10 @@
 		from plan_travel
 		where plan_id = #{planId}
 	</select>
+	
+	<delete id="deletePlan" parameterType="int">
+		delete from plan
+		where plan_id = #{planId}
+	</delete>
     
 </mapper>

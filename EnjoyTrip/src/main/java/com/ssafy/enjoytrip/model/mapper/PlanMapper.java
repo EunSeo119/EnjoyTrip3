@@ -19,4 +19,5 @@ public interface PlanMapper {
 	
 	Plan selectGetDetail(int planId) throws SQLException;
 	
+	void deletePlan(int planId) throws SQLException;
 }
