@@ -34,4 +34,10 @@ public class PlanServiceImpl implements PlanService{
 	public Plan getPlanDetail(int planId) throws Exception {
 		return planMapper.selectGetDetail(planId);
 	}
+
+	@Override
+	public void deletePlan(int planId) throws Exception {
+		planMapper.deletePlan(planId);
+	}
+	
 }
