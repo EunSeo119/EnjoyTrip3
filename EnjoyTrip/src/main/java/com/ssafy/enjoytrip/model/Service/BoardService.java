@@ -10,4 +10,6 @@ public interface BoardService {
 	void writeNotice(Notice notice);
 	
 	Notice getNoticeDetail(int noticeId) throws Exception;
+	
+	void modifyNotice(Notice notice);
 }

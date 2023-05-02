@@ -18,4 +18,6 @@ public interface BoardMapper {
 	Notice selectGetDetail(int noticeId) throws SQLException;
 	
 	void updateViewCount(@Param("noticeId") int noticeId, @Param("viewCount") int viewCount);
+	
+	void modifyNotice(Notice notice);
 }
