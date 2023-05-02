@@ -1,15 +1,20 @@
 package com.ssafy.enjoytrip.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "TravelStatus : 여행지 상태 정보", description = "여행지 상태 정보")
 public class TravelStatus {
+    @ApiModelProperty(value = "여행지 상태 아이디")
     private int travelStatusId;
+    @ApiModelProperty(value = "사용자 아이디")
     private String userId;
+    @ApiModelProperty(value = "여행지 아이디")
     private int travelInfoId;
+    @ApiModelProperty(value = "좋아요")
     private int like;
+    @ApiModelProperty(value = "별점")
     private Double star;
-
-    public TravelStatus() {
-
-    }
 
 
     public int getTravelStatusId() {
