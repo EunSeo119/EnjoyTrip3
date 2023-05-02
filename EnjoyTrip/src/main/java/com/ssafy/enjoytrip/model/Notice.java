@@ -1,10 +1,19 @@
 package com.ssafy.enjoytrip.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "NoticeDescription : 공지사항 정보", description = "공지사항 정보")
 public class Notice {
+	@ApiModelProperty(value = "공지사항 아이디")
 	private int noticeId;
+	@ApiModelProperty(value = "공지사항 제목")
 	private String title;
+	@ApiModelProperty(value = "공지사항 내용")
 	private String content;
+	@ApiModelProperty(value = "공지사항 작성일")
 	private String createDate;
+	@ApiModelProperty(value = "공지사항 조회수")
 	private int views;
 
 	public int getNoticeId() {
