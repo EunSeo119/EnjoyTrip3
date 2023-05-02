@@ -25,6 +25,12 @@
     	where notice_id = #{noticeId}
     </update>
     
+    <update id="modifyNotice" parameterType="notice">
+		update notice
+		set title = #{title}, content = #{content}
+		where notice_id = #{noticeId}
+	</update>
+    
     <!-- <resultMap id="updateView">
     	<association select=""
     </resultMap> -->

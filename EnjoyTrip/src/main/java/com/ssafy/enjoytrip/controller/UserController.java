@@ -14,7 +14,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
-@Api(value = "User", description = "사용자 관리")
+@Api(tags = "사용자 관리")
 public class UserController {
     private final UserService userService;
 

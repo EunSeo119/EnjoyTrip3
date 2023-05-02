@@ -34,4 +34,9 @@ public class BoardServiceImpl implements BoardService {
 		return notice;
 	}
 
+	@Override
+	public void modifyNotice(Notice notice) {
+		boardMapper.modifyNotice(notice);
+	}
+
 }
